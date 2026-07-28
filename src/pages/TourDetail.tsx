@@ -97,6 +97,28 @@ const TourDetail = () => {
         ? "https://schema.org/SoldOut"
         : "https://schema.org/InStock",
     url: `${siteUrl}/tours/${tour.slug}`,
+    hasMerchantReturnPolicy: {
+      "@type": "MerchantReturnPolicy",
+      applicableCountry: "CA",
+      returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+    },
+    shippingDetails: {
+      "@type": "OfferShippingDetails",
+      shippingRate: {
+        "@type": "MonetaryAmount",
+        value: "0",
+        currency: "CAD",
+      },
+      shippingDestination: {
+        "@type": "DefinedRegion",
+        addressCountry: "CA",
+      },
+      deliveryTime: {
+        "@type": "ShippingDeliveryTime",
+        handlingTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 0, unitCode: "DAY" },
+        transitTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 0, unitCode: "DAY" },
+      },
+    },
   }));
   const seoTitle = tour.seoTitle ?? `${tour.title} | Silver Bear Photo Tours`;
   const seoDescription = tour.seoDescription ?? tour.description;
