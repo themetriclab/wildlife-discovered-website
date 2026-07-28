@@ -1,39 +1,26 @@
-## Fix Google Search Console "Improve item appearance" warnings
+You are absolutely right: a guided photography tour is a service/experience, not a physical product, so merchant return policies and shipping details make no sense. Those fields were added because the page is currently using `Product` structured data, and Google's Product rich-result validator flags `Offer` blocks that lack `hasMerchantReturnPolicy` and `shippingDetails`. The real fix is not to force e-commerce fields onto a tour, but to use a schema type that actually describes a tour.
 
-Search Console flagged two missing fields on the Product/Offer structured data emitted by tour detail pages:
+## Proposed change
 
-- `hasMerchantReturnPolicy` (in `offers`)
-- `shippingDetails` (in `offers`)
+Replace the `Product` JSON-LD on each tour detail page with a `TouristAttraction` schema (schema.org's type for places/experiences people visit). This keeps the rich-result benefits for tours while removing the irrelevant return/shipping requirements.
 
-These come from the JSON-LD in `src/pages/TourDetail.tsx` where each pricing entry is serialized as a `schema.org/Offer`.
+## What will be updated
 
-### Change
+1. **File: `src/pages/TourDetail.tsx`**
+   - Remove the `Product` object and its `Offer` array.
+   - Remove `hasMerchantReturnPolicy` and `shippingDetails` entirely.
+   - Add a `TouristAttraction` JSON-LD object containing:
+     - `name` (tour title)
+     - `description` (SEO description)
+     - `image` (tour hero image)
+     - `url` (canonical tour URL)
+     - `address` / `addressCountry` (derived from the tour's `location` field)
+     - `touristType` (e.g., "Wildlife photography enthusiasts")
+   - Keep the existing `BreadcrumbList` and `FAQPage` schemas unchanged.
 
-In `src/pages/TourDetail.tsx`, extend each generated `Offer` object with the two required sub-objects. Since guided photo tours are experiences (no physical shipping, no returns), we declare that explicitly using schema.org values Google accepts:
+2. **Validation**
+   - Confirm the rendered JSON-LD is valid schema.org markup and that no return-policy or shipping fields remain anywhere in `src/`.
 
-```ts
-hasMerchantReturnPolicy: {
-  "@type": "MerchantReturnPolicy",
-  applicableCountry: "CA",
-  returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted"
-},
-shippingDetails: {
-  "@type": "OfferShippingDetails",
-  shippingRate: {
-    "@type": "MonetaryAmount",
-    value: "0",
-    currency: "CAD"
-  },
-  shippingDestination: {
-    "@type": "DefinedRegion",
-    addressCountry: "CA"
-  },
-  deliveryTime: {
-    "@type": "ShippingDeliveryTime",
-    handlingTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 0, unitCode: "DAY" },
-    transitTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 0, unitCode: "DAY" }
-  }
-}
-```
+## Result
 
-No visible UI changes; only the embedded JSON-LD. After deploy, Google will re-crawl and the two "Not started" issues in the Merchant listings report will clear.
+Google's Product/Shopping warnings will disappear because the page will no longer claim to be a shippable product. The tour pages will still expose structured data that helps search engines understand the experience, location, and FAQs.
