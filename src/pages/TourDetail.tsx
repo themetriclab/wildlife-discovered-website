@@ -87,52 +87,24 @@ const TourDetail = () => {
 
   const siteUrl = "https://silverbearphototours.com";
   const absoluteImage = tour.image.startsWith("http") ? tour.image : `${siteUrl}${tour.image}`;
-  const offers = tour.pricing?.map((p) => ({
-    "@type": "Offer",
-    name: p.label,
-    price: p.price.replace(/[^0-9.]/g, ""),
-    priceCurrency: "CAD",
-    availability:
-      p.availability.toLowerCase() === "full"
-        ? "https://schema.org/SoldOut"
-        : "https://schema.org/InStock",
-    url: `${siteUrl}/tours/${tour.slug}`,
-    hasMerchantReturnPolicy: {
-      "@type": "MerchantReturnPolicy",
-      applicableCountry: "CA",
-      returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
-    },
-    shippingDetails: {
-      "@type": "OfferShippingDetails",
-      shippingRate: {
-        "@type": "MonetaryAmount",
-        value: "0",
-        currency: "CAD",
-      },
-      shippingDestination: {
-        "@type": "DefinedRegion",
-        addressCountry: "CA",
-      },
-      deliveryTime: {
-        "@type": "ShippingDeliveryTime",
-        handlingTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 0, unitCode: "DAY" },
-        transitTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 0, unitCode: "DAY" },
-      },
-    },
-  }));
   const seoTitle = tour.seoTitle ?? `${tour.title} | Silver Bear Photo Tours`;
   const seoDescription = tour.seoDescription ?? tour.description;
   const h1 = tour.h1 ?? tour.title;
   const gallerySlug = tour.gallerySlug ?? tour.slug;
 
-  const productLd = {
+  const touristAttractionLd = {
     "@context": "https://schema.org",
-    "@type": "Product",
+    "@type": "TouristAttraction",
     name: tour.title,
     description: seoDescription,
     image: absoluteImage,
-    brand: { "@type": "Brand", name: "Silver Bear Photo Tours" },
-    ...(offers && offers.length > 0 ? { offers } : {}),
+    url: `${siteUrl}/tours/${tour.slug}`,
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "CA",
+      addressLocality: tour.location,
+    },
+    touristType: "Wildlife photography enthusiasts",
   };
   const breadcrumbLd = {
     "@context": "https://schema.org",
@@ -154,7 +126,7 @@ const TourDetail = () => {
         })),
       }
     : null;
-  const jsonLd: Record<string, unknown>[] = [productLd, breadcrumbLd];
+  const jsonLd: Record<string, unknown>[] = [touristAttractionLd, breadcrumbLd];
   if (faqLd) jsonLd.push(faqLd);
 
   return (
