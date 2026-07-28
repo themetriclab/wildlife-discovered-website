@@ -126,7 +126,7 @@ const TourDetail = () => {
         })),
       }
     : null;
-  const jsonLd: Record<string, unknown>[] = [productLd, breadcrumbLd];
+  const jsonLd: Record<string, unknown>[] = [touristAttractionLd, breadcrumbLd];
   if (faqLd) jsonLd.push(faqLd);
 
   return (
