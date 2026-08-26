@@ -141,6 +141,19 @@ const TourDetail = () => {
       />
       <Navbar />
 
+      {/* Breadcrumbs */}
+      <nav aria-label="Breadcrumb" className="max-w-7xl mx-auto px-6 pt-24 md:pt-28">
+        <ol className="flex flex-wrap items-center gap-2 text-xs tracking-wider uppercase text-muted-foreground">
+          <li><Link to="/" className="hover:text-primary transition-colors">Home</Link></li>
+          <li aria-hidden="true">/</li>
+          <li><Link to="/tours" className="hover:text-primary transition-colors">Photography Tours</Link></li>
+          <li aria-hidden="true">/</li>
+          <li className="text-foreground" aria-current="page">{tour.title}</li>
+        </ol>
+      </nav>
+
+
+
 
       {/* Hero */}
       <section className="relative h-[70vh] md:h-[80vh] overflow-hidden">
