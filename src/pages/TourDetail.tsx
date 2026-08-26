@@ -417,7 +417,12 @@ const TourDetail = () => {
 
         {/* Other Tours */}
         <motion.section {...fadeUp}>
-          <SectionHeader label="Explore" title="Other Expeditions" />
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <SectionHeader label="Explore" title="Other Expeditions" />
+            <Link to="/tours" className="text-sm text-primary hover:underline font-medium tracking-wider uppercase">
+              View all photography tours
+            </Link>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
             {otherTours.map((t) => (
               <Link
