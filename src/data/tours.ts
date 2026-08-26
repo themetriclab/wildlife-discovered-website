@@ -1,6 +1,6 @@
 import loonImg from "@/assets/loon-chick.jpg";
 import mooseImg from "@/assets/moose.jpg";
-import algonquinCoverAsset from "@/assets/algonquin-moose-cover.jpg.asset.json";
+import algonquinCoverAsset from "@/assets/algonquin-moose-cover-edited.webp";
 import polarBearImg from "@/assets/polar-bear.jpg";
 import waterfowlImg from "@/assets/waterfowl.jpg";
 import swanImg from "@/assets/swan.jpg";
