@@ -170,7 +170,7 @@ const rawTours: Tour[] = [
     h1: "Algonquin Park Wildlife Photography Tour by Boat",
     seoTitle: "Algonquin Park Wildlife Photography Tour by Boat",
     seoDescription: "Guided wildlife photography tours by boat in Algonquin Park, Ontario. Photograph moose, bald eagles, loons and boreal wildlife from a stable photo boat.",
-    image: algonquinCoverAsset.url,
+    image: algonquinCoverAsset,
     month: "June",
     season: "Early Summer",
     location: "Algonquin Provincial Park, Ontario",
