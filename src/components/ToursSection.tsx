@@ -43,7 +43,7 @@ const ToursSection = () => {
                 to={`/tours/${featured.slug}`}
                 className="group grid md:grid-cols-2 bg-card border border-primary/30 rounded-lg overflow-hidden hover:border-primary/70 transition-all duration-500"
               >
-                <div className="relative overflow-hidden aspect-[16/10] md:aspect-auto md:min-h-[340px]">
+                <div className="relative overflow-hidden aspect-[3/2] md:aspect-auto md:min-h-[420px]">
                   <img
                     src={featured.image}
                     alt="Polar bear photographed at ground level in Churchill, Manitoba"
@@ -88,7 +88,7 @@ const ToursSection = () => {
                 to={`/tours/${tour.slug}`}
                 className="group block bg-card border border-border rounded-lg overflow-hidden hover:border-primary/40 transition-all duration-500"
               >
-                <div className="relative overflow-hidden aspect-[16/10]">
+                <div className="relative overflow-hidden aspect-[3/2]">
                   {tour.image2 ? (
                     <DiagonalSplitImage
                       image1={tour.image}
