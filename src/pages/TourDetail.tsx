@@ -156,11 +156,19 @@ const TourDetail = () => {
 
 
       {/* Hero */}
-      <section className="relative h-[70vh] md:h-[80vh] overflow-hidden">
+      <section className="relative h-[75vh] md:h-[85vh] overflow-hidden">
         {tour.image2 ? (
           <DiagonalSplitImage image1={tour.image} image2={tour.image2} alt={tour.title} className="absolute inset-0 w-full h-full" />
         ) : (
-          <img src={tour.image} alt={tour.title} className="absolute inset-0 w-full h-full object-cover" />
+          <img
+            src={tour.image}
+            alt={tour.title}
+            className={`absolute inset-0 w-full h-full object-cover ${
+              tour.slug === "algonquin-park-wildlife-photography-tour" || tour.slug === "moose-photography-tours"
+                ? "scale-[1.2] object-[center_45%]"
+                : ""
+            }`}
+          />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-background/20" />
         <div className="relative z-10 flex flex-col justify-end h-full max-w-7xl mx-auto px-6 pb-16">
