@@ -81,7 +81,7 @@ const Tours = () => {
                   to={`/tours/${tour.slug}`}
                   className="group block bg-card border border-border rounded-lg overflow-hidden hover:border-primary/40 transition-all duration-500 h-full"
                 >
-                  <div className="relative overflow-hidden aspect-[16/10]">
+                  <div className="relative overflow-hidden aspect-[3/2]">
                     {tour.image2 ? (
                       <DiagonalSplitImage
                         image1={tour.image}
