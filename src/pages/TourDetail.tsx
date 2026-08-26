@@ -141,6 +141,19 @@ const TourDetail = () => {
       />
       <Navbar />
 
+      {/* Breadcrumbs */}
+      <nav aria-label="Breadcrumb" className="max-w-7xl mx-auto px-6 pt-24 md:pt-28">
+        <ol className="flex flex-wrap items-center gap-2 text-xs tracking-wider uppercase text-muted-foreground">
+          <li><Link to="/" className="hover:text-primary transition-colors">Home</Link></li>
+          <li aria-hidden="true">/</li>
+          <li><Link to="/tours" className="hover:text-primary transition-colors">Photography Tours</Link></li>
+          <li aria-hidden="true">/</li>
+          <li className="text-foreground" aria-current="page">{tour.title}</li>
+        </ol>
+      </nav>
+
+
+
 
       {/* Hero */}
       <section className="relative h-[70vh] md:h-[80vh] overflow-hidden">
@@ -404,7 +417,12 @@ const TourDetail = () => {
 
         {/* Other Tours */}
         <motion.section {...fadeUp}>
-          <SectionHeader label="Explore" title="Other Expeditions" />
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <SectionHeader label="Explore" title="Other Expeditions" />
+            <Link to="/tours" className="text-sm text-primary hover:underline font-medium tracking-wider uppercase">
+              View all photography tours
+            </Link>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
             {otherTours.map((t) => (
               <Link
