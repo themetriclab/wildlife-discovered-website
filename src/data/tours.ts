@@ -4,6 +4,26 @@ import polarBearImg from "@/assets/polar-bear.jpg";
 import waterfowlImg from "@/assets/waterfowl.jpg";
 import swanImg from "@/assets/swan.jpg";
 
+const monthOrder: Record<string, number> = {
+  January: 1,
+  February: 2,
+  March: 3,
+  April: 4,
+  May: 5,
+  June: 6,
+  July: 7,
+  August: 8,
+  September: 9,
+  October: 10,
+  November: 11,
+  December: 12,
+};
+
+const getMonthOrder = (month: string): number => {
+  const firstMonth = month.split(/–|-/)[0].trim();
+  return monthOrder[firstMonth] ?? 99;
+};
+
 export interface TourFact {
   label: string;
   value: string;
@@ -61,7 +81,7 @@ export interface Tour {
   gallerySlug?: string;
 }
 
-export const tours: Tour[] = [
+const rawTours: Tour[] = [
   {
     slug: "loon-photography-tours",
     title: "Loon Photography Tours & Workshops",
@@ -478,3 +498,9 @@ export const tours: Tour[] = [
     ],
   },
 ];
+
+export const tours: Tour[] = rawTours.sort((a, b) => {
+  const orderA = getMonthOrder(a.month);
+  const orderB = getMonthOrder(b.month);
+  return orderA !== orderB ? orderA - orderB : a.title.localeCompare(b.title);
+});
