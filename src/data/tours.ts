@@ -1,5 +1,6 @@
 import loonImg from "@/assets/loon-chick.jpg";
 import mooseImg from "@/assets/moose.jpg";
+import algonquinCoverAsset from "@/assets/algonquin-moose-cover.jpg.asset.json";
 import polarBearImg from "@/assets/polar-bear.jpg";
 import waterfowlImg from "@/assets/waterfowl.jpg";
 import swanImg from "@/assets/swan.jpg";
@@ -169,7 +170,7 @@ const rawTours: Tour[] = [
     h1: "Algonquin Park Wildlife Photography Tour by Boat",
     seoTitle: "Algonquin Park Wildlife Photography Tour by Boat",
     seoDescription: "Guided wildlife photography tours by boat in Algonquin Park, Ontario. Photograph moose, bald eagles, loons and boreal wildlife from a stable photo boat.",
-    image: mooseImg,
+    image: algonquinCoverAsset.url,
     month: "June",
     season: "Early Summer",
     location: "Algonquin Provincial Park, Ontario",
