@@ -200,7 +200,7 @@ export const tours: Tour[] = [
       { label: "3-Day Algonquin Wildlife by Boat", price: "$1,500.00", dates: "June 4–6, 2027", availability: "Full" },
       { label: "3-Day Algonquin Wildlife by Boat", price: "$1,500.00", dates: "June 7–9, 2027", availability: "1 Spot Available" },
       { label: "3-Day Algonquin Wildlife by Boat", price: "$1,500.00", dates: "June 10–12, 2027", availability: "Full" },
-      { label: "3-Day Algonquin Wildlife by Boat", price: "$1,500.00", dates: "June 13–15, 2027", availability: "3 Spots Available" },
+      { label: "3-Day Algonquin Wildlife by Boat", price: "$1,500.00", dates: "June 13–15, 2027", availability: "2 Spots Available" },
       { label: "3-Day Algonquin Wildlife by Boat", price: "$1,500.00", dates: "June 16–18, 2027", availability: "1 Spot Available" },
     ],
     priceIncludes: [
