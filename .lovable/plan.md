@@ -1,26 +1,36 @@
-You are absolutely right: a guided photography tour is a service/experience, not a physical product, so merchant return policies and shipping details make no sense. Those fields were added because the page is currently using `Product` structured data, and Google's Product rich-result validator flags `Offer` blocks that lack `hasMerchantReturnPolicy` and `shippingDetails`. The real fix is not to force e-commerce fields onto a tour, but to use a schema type that actually describes a tour.
+# Polar Bear Tour Page — Competitor Content Gap Fix
 
-## Proposed change
+## What the other two pages have that yours doesn't
 
-Replace the `Product` JSON-LD on each tour detail page with a `TouristAttraction` schema (schema.org's type for places/experiences people visit). This keeps the rich-result benefits for tours while removing the irrelevant return/shipping requirements.
+Your Churchill page already covers: ground-level shooting, group of 5, lodge with private baths, gear and clothing lists, prices in CAD + USD, deposit/payment terms, FAQ. It is **missing** these items that appear on wildoutdoors.ca and churchillpolarbearphotographytours.com:
 
-## What will be updated
+1. **Per-trip breakdown of what's included in each trip length** — e.g. "6 Day Trip = 5 nights accommodation, 5 days of photography (4 full days + 2 half days)". Each competitor lists this for every trip length; your page shows only dates and prices.
+2. **Day-by-day itinerary** — Arrival day (fly Winnipeg → Churchill, airport pickup, safety orientation, first shoot, group dinner), full shoot days (early breakfast, first-light departures, lunch in the field, evening review), departure day (morning shoot, midday flight back).
+3. **Fitness & physical requirements** — low-to-medium fitness, short walks in snow under a foot deep, possible icy conditions, bathroom breaks available throughout the day.
+4. **Safety details** — guides carry firearms (never yet needed in Churchill), years spent learning from Inuit guides in northern Hudson Bay.
+5. **Flight logistics** — Calm Air is the airline from Winnipeg to Churchill, seats reserved for guests at a discounted rate, flight booking assistance offered so travel is seamless.
+6. **Lodge quiet hours** — quiet time 9pm–5:30am for restful sleep (rare private bathrooms in Churchill).
+7. **Exact single-occupancy supplement per trip length** — competitors list $900 / $1,000 / $1,200 / $1,400 CAD for 5/6/7/8-day trips; yours only says "$950–$1,400 depending on trip length".
+8. **2028 note** — "Contact us if you're interested in 2028 dates" line to capture early demand.
+9. **Refund policy detail** — if balance isn't paid, spot is offered to the waiting list; if filled, guest receives credit toward another trip.
 
-1. **File: `src/pages/TourDetail.tsx`**
-   - Remove the `Product` object and its `Offer` array.
-   - Remove `hasMerchantReturnPolicy` and `shippingDetails` entirely.
-   - Add a `TouristAttraction` JSON-LD object containing:
-     - `name` (tour title)
-     - `description` (SEO description)
-     - `image` (tour hero image)
-     - `url` (canonical tour URL)
-     - `address` / `addressCountry` (derived from the tour's `location` field)
-     - `touristType` (e.g., "Wildlife photography enthusiasts")
-   - Keep the existing `BreadcrumbList` and `FAQPage` schemas unchanged.
+## Proposed changes (src/data/tours.ts, polar bear entry)
 
-2. **Validation**
-   - Confirm the rendered JSON-LD is valid schema.org markup and that no return-policy or shipping fields remain anywhere in `src/`.
+- Add a new "Sample Day-by-Day Itinerary" section (arrival / shoot days / departure).
+- Add a "Fitness & Safety" section covering physical requirements, firearms policy, and guide experience.
+- Add the per-trip lodging/photography-day breakdown to the pricing area (e.g. under each trip label or in a small note).
+- Expand flight info in `priceExcludes`/logistics: Calm Air, reserved seats at discounted rate, booking assistance.
+- Update single-occupancy supplements to exact per-trip amounts.
+- Add the "2028 dates — contact us" note and the waiting-list credit refund policy to `paymentPolicy`.
+- Add one or two new FAQ entries (fitness level, flights to Churchill).
 
-## Result
+## Needs your confirmation before I write it
 
-Google's Product/Shopping warnings will disappear because the page will no longer claim to be a shippable product. The tour pages will still expose structured data that helps search engines understand the experience, location, and FAQs.
+- **Guide credentials**: the other pages credit Michael Bertelsen with National Geographic, BBC Films, and Love Nature. Since your page is led by Erik, should I mention those credits (as "worked with") or leave them off?
+- **Supplement amounts**: use the exact $900/$1,000/$1,200/$1,400 figures from the other pages?
+
+## Technical notes
+
+- All edits confined to the polar bear object in `src/data/tours.ts` (plus, if needed, an itinerary rendering block in `src/pages/TourDetail.tsx` following the existing section pattern).
+- No testimonials, phone numbers, or addresses added — per brand constraints.
+- Content rewritten in Silver Bear's own voice, not copied verbatim, to avoid duplicate-content SEO issues between the related sites.
