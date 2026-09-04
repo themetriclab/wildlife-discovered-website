@@ -322,7 +322,6 @@ const TourDetail = () => {
             <div className="grid md:grid-cols-3 gap-4 mt-10">
               {tour.pricing.map((p, i) => (
               <SpotlightCard key={i} className="p-6 flex flex-col relative overflow-hidden">
-                  <CardDecoration icon="Calendar" />
                   <div className="relative z-10 flex-1">
                     <div className="flex items-center gap-2 mb-3">
                       <div className="flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-primary">
