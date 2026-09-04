@@ -70,8 +70,28 @@ const fadeUp = {
   transition: { duration: 0.6 },
 };
 
+const PolarBearIcon = ({ size = 20, className }: { size?: number; className?: string }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M8 6c-1.5 0-2.5 1-2.5 2.5 0 .5.2 1 .5 1.3-1 .5-1.8 1.6-1.8 3 0 2.5 2 4.7 4.8 4.7h4c2.8 0 4.8-2.2 4.8-4.7 0-1.4-.8-2.5-1.8-3 .3-.3.5-.8.5-1.3C17 7 16 6 14.5 6c-.8 0-1.5.3-2 .8-.5-.5-1.2-.8-2-.8s-1.5.3-2 .8c-.5-.5-1.2-.8-2-.8z" />
+    <circle cx="9.5" cy="9.5" r=".6" fill="currentColor" />
+    <circle cx="14.5" cy="9.5" r=".6" fill="currentColor" />
+    <ellipse cx="12" cy="12.5" rx="1.2" ry=".8" fill="currentColor" />
+  </svg>
+);
+
 const IconByName = ({ name, className, size = 20 }: { name?: string; className?: string; size?: number }) => {
   if (!name) return null;
+  if (name === "PolarBear") return <PolarBearIcon size={size} className={className} />;
   const Icon = (icons as Record<string, React.ComponentType<{ size?: number; className?: string }>>)[name];
   return Icon ? <Icon size={size} className={className} /> : null;
 };
@@ -87,7 +107,7 @@ const factIcon = (label: string): string => {
   if (lower.includes("lifespan")) return "Hourglass";
   if (lower.includes("diet")) return "Utensils";
   if (lower.includes("population")) return "Users";
-  if (lower.includes("fur")) return "Shirt";
+  if (lower.includes("fur")) return "PolarBear";
   if (lower.includes("species") || lower.includes("diversity")) return "Bird";
   return "Info";
 };
