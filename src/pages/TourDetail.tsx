@@ -491,7 +491,7 @@ const TourDetail = () => {
             <div className="mt-10 space-y-4">
               {tour.faqs.map((f, i) => (
                 <SpotlightCard key={i} className="p-6 relative overflow-hidden">
-                  <CardDecoration index={i} icon="HelpCircle" />
+                  <CardDecoration icon="HelpCircle" />
                   <div className="relative z-10">
                     <div className="flex items-start gap-3 mb-3">
                       <HelpCircle size={18} className="text-primary mt-0.5 shrink-0" />
