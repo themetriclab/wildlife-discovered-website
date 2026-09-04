@@ -10,6 +10,7 @@ import Seo from "@/components/Seo";
 import DiagonalSplitImage from "@/components/DiagonalSplitImage";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
 import { ImageAutoSlider } from "@/components/ui/image-auto-slider";
+import groupPhotoGroundLevel from "@/assets/polar-bear/group-photo-ground-level.png.asset.json";
 
 import loonHighKey2 from "@/assets/loon/high-key-loon-2.png";
 import loonMist from "@/assets/loon/loon-in-mist.jpg";
@@ -384,6 +385,21 @@ const TourDetail = () => {
             <SectionHeader label="Photography" title={tour.whyPhotograph.title} />
             <p className="text-muted-foreground leading-relaxed mt-6">{tour.whyPhotograph.content}</p>
           </div>
+        </motion.section>
+
+        {/* Ground-Level Group Photo */}
+        <motion.section {...fadeUp}>
+          <div className="rounded-xl overflow-hidden border border-border">
+            <img
+              src={groupPhotoGroundLevel.url}
+              alt="Photographers photographing polar bears at ground level in Churchill, Manitoba"
+              className="w-full h-auto object-cover"
+              loading="lazy"
+            />
+          </div>
+          <p className="text-center text-sm text-muted-foreground mt-4">
+            Guests photographing polar bears at ground level in Churchill, Manitoba
+          </p>
         </motion.section>
 
         {/* What to Expect */}
