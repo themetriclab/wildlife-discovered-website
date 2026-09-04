@@ -281,6 +281,9 @@ const TourDetail = () => {
                     <Calendar size={14} className="text-muted-foreground" />
                     <p className="text-sm text-muted-foreground">{p.dates}</p>
                   </div>
+                  {p.note && (
+                    <p className="text-xs text-muted-foreground mb-3 leading-relaxed">{p.note}</p>
+                  )}
                   <span className={`mt-auto inline-block text-xs font-medium tracking-wider uppercase px-3 py-1 rounded-full ${
                     p.availability.toLowerCase() === "full"
                       ? "bg-destructive/10 text-destructive"
