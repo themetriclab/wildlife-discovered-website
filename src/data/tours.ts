@@ -72,6 +72,8 @@ export interface Tour {
   migrationInfo: TourSection;
   whyPhotograph: TourSection;
   whatToExpect: TourSection;
+  /** Optional structured what-to-expect cards rendered like the itinerary. */
+  whatToExpectItems?: TourItineraryDay[];
   gearTips: string[];
   pricing?: TourPricing[];
   priceIncludes?: string[];
