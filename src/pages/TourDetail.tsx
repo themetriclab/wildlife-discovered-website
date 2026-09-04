@@ -506,15 +506,19 @@ const TourDetail = () => {
             <SectionHeader label="FAQ" title="Frequently Asked Questions" />
             <div className="mt-10 space-y-4">
               {tour.faqs.map((f, i) => (
-                <SpotlightCard key={i} className="p-6">
-                  <div className="flex items-start gap-3 mb-3">
-                    <HelpCircle size={18} className="text-primary mt-0.5 shrink-0" />
-                    <h3 className="text-foreground font-medium">{f.question}</h3>
+                <SpotlightCard key={i} className="p-6 relative overflow-hidden">
+                  <CardDecoration index={i} icon="HelpCircle" />
+                  <div className="relative z-10">
+                    <div className="flex items-start gap-3 mb-3">
+                      <HelpCircle size={18} className="text-primary mt-0.5 shrink-0" />
+                      <h3 className="text-foreground font-medium">{f.question}</h3>
+                    </div>
+                    <p className="text-muted-foreground text-sm leading-relaxed pl-7">{f.answer}</p>
                   </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed pl-7">{f.answer}</p>
                 </SpotlightCard>
               ))}
             </div>
+
           </motion.section>
         )}
         <motion.section {...fadeUp} className="text-center py-12">
