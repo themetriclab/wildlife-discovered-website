@@ -47,7 +47,10 @@ export interface TourPricing {
 export interface TourItineraryDay {
   title: string;
   content: string;
+  /** Optional Lucide icon name rendered at the top of the card. */
+  icon?: string;
 }
+
 
 export interface TourFaq {
   question: string;
