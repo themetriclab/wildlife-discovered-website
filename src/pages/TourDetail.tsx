@@ -93,23 +93,12 @@ const factIcon = (label: string): string => {
 };
 
 
-const CardDecoration = ({ index, icon }: { index?: number; icon?: string }) => (
+const CardDecoration = ({ icon }: { icon?: string }) => (
   <div className="absolute top-0 right-0 p-5 opacity-[0.04] pointer-events-none select-none overflow-hidden">
-    {icon ? (
-      <IconByName name={icon} size={96} className="text-primary" />
-    ) : index !== undefined ? (
-      <span className="text-7xl font-display font-bold text-primary leading-none">
-        {String(index + 1).padStart(2, "0")}
-      </span>
-    ) : null}
+    {icon ? <IconByName name={icon} size={96} className="text-primary" /> : null}
   </div>
 );
 
-const NumberBadge = ({ index }: { index: number }) => (
-  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary text-xs font-bold font-display mb-4">
-    {String(index + 1).padStart(2, "0")}
-  </div>
-);
 
 
 const TourDetail = () => {
@@ -275,7 +264,6 @@ const TourDetail = () => {
           <div className="grid md:grid-cols-2 gap-4 mt-10">
             {tour.highlights.map((h, i) => (
               <SpotlightCard key={i} className="p-5 relative overflow-hidden">
-                <CardDecoration index={i} />
                 <div className="relative z-10 flex items-start gap-3">
                   <ChevronRight size={18} className="text-primary mt-0.5 shrink-0" />
                   <p className="text-foreground/90 text-sm leading-relaxed">{h}</p>
@@ -320,14 +308,13 @@ const TourDetail = () => {
             )}
             <div className="grid md:grid-cols-3 gap-4 mt-10">
               {tour.pricing.map((p, i) => (
-                <SpotlightCard key={i} className="p-6 flex flex-col relative overflow-hidden">
-                  <CardDecoration index={i} icon="Calendar" />
+              <SpotlightCard key={i} className="p-6 flex flex-col relative overflow-hidden">
+                  <CardDecoration icon="Calendar" />
                   <div className="relative z-10 flex-1">
                     <div className="flex items-center gap-2 mb-3">
                       <div className="flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-primary">
                         <Calendar size={14} />
                       </div>
-                      <span className="text-xs text-muted-foreground uppercase tracking-wider">Tour {String(i + 1).padStart(2, "0")}</span>
                     </div>
                     <p className="text-sm font-medium text-foreground mb-2">{p.label}</p>
                     <p className="text-2xl font-display font-bold text-primary mb-2">{p.price}</p>
@@ -361,7 +348,7 @@ const TourDetail = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-10">
             {tour.animalFacts.map((fact, i) => (
               <SpotlightCard key={fact.label} className="p-5 relative overflow-hidden">
-                <CardDecoration index={i} icon={factIcon(fact.label)} />
+                <CardDecoration icon={factIcon(fact.label)} />
                 <div className="relative z-10">
                   <div className="flex items-center gap-2 mb-2">
                     <IconByName name={factIcon(fact.label)} size={16} className="text-primary" />
@@ -394,10 +381,9 @@ const TourDetail = () => {
             <div className="grid md:grid-cols-3 gap-6 mt-10">
               {tour.whatToExpectItems.map((item, i) => (
                 <SpotlightCard key={i} className="p-6 relative overflow-hidden">
-                  <CardDecoration index={i} icon={item.icon} />
+                  <CardDecoration icon={item.icon} />
                   <div className="relative z-10">
                     <div className="flex items-center gap-3 mb-4">
-                      <NumberBadge index={i} />
                       <IconByName name={item.icon} size={22} className="text-primary" />
                     </div>
                     <h3 className="text-lg font-display font-semibold text-foreground mb-3">{item.title}</h3>
@@ -421,9 +407,7 @@ const TourDetail = () => {
             <div className="grid md:grid-cols-3 gap-6 mt-10">
               {tour.itinerary.map((day, i) => (
                 <SpotlightCard key={i} className="p-6 relative overflow-hidden">
-                  <CardDecoration index={i} />
                   <div className="relative z-10">
-                    <NumberBadge index={i} />
                     <h3 className="text-lg font-display font-semibold text-foreground mb-3">{day.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">{day.content}</p>
                   </div>
@@ -448,7 +432,7 @@ const TourDetail = () => {
           <div className="grid md:grid-cols-2 gap-4 mt-10">
             {tour.gearTips.map((tip, i) => (
               <SpotlightCard key={i} className="p-5 relative overflow-hidden">
-                <CardDecoration index={i} icon="Camera" />
+                <CardDecoration icon="Camera" />
                 <div className="relative z-10 flex items-start gap-3">
                   <Camera size={16} className="text-primary mt-0.5 shrink-0" />
                   <p className="text-foreground/90 text-sm">{tip}</p>
@@ -507,7 +491,7 @@ const TourDetail = () => {
             <div className="mt-10 space-y-4">
               {tour.faqs.map((f, i) => (
                 <SpotlightCard key={i} className="p-6 relative overflow-hidden">
-                  <CardDecoration index={i} icon="HelpCircle" />
+                  <CardDecoration icon="HelpCircle" />
                   <div className="relative z-10">
                     <div className="flex items-start gap-3 mb-3">
                       <HelpCircle size={18} className="text-primary mt-0.5 shrink-0" />
