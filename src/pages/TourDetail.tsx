@@ -93,23 +93,12 @@ const factIcon = (label: string): string => {
 };
 
 
-const CardDecoration = ({ index, icon }: { index?: number; icon?: string }) => (
+const CardDecoration = ({ icon }: { icon?: string }) => (
   <div className="absolute top-0 right-0 p-5 opacity-[0.04] pointer-events-none select-none overflow-hidden">
-    {icon ? (
-      <IconByName name={icon} size={96} className="text-primary" />
-    ) : index !== undefined ? (
-      <span className="text-7xl font-display font-bold text-primary leading-none">
-        {String(index + 1).padStart(2, "0")}
-      </span>
-    ) : null}
+    {icon ? <IconByName name={icon} size={96} className="text-primary" /> : null}
   </div>
 );
 
-const NumberBadge = ({ index }: { index: number }) => (
-  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary text-xs font-bold font-display mb-4">
-    {String(index + 1).padStart(2, "0")}
-  </div>
-);
 
 
 const TourDetail = () => {
