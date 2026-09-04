@@ -308,14 +308,13 @@ const TourDetail = () => {
             )}
             <div className="grid md:grid-cols-3 gap-4 mt-10">
               {tour.pricing.map((p, i) => (
-                <SpotlightCard key={i} className="p-6 flex flex-col relative overflow-hidden">
-                  <CardDecoration index={i} icon="Calendar" />
+              <SpotlightCard key={i} className="p-6 flex flex-col relative overflow-hidden">
+                  <CardDecoration icon="Calendar" />
                   <div className="relative z-10 flex-1">
                     <div className="flex items-center gap-2 mb-3">
                       <div className="flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-primary">
                         <Calendar size={14} />
                       </div>
-                      <span className="text-xs text-muted-foreground uppercase tracking-wider">Tour {String(i + 1).padStart(2, "0")}</span>
                     </div>
                     <p className="text-sm font-medium text-foreground mb-2">{p.label}</p>
                     <p className="text-2xl font-display font-bold text-primary mb-2">{p.price}</p>
