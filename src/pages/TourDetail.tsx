@@ -359,14 +359,21 @@ const TourDetail = () => {
         <motion.section {...fadeUp}>
           <SectionHeader label="Wildlife" title="Animal Facts" />
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-10">
-            {tour.animalFacts.map((fact) => (
-              <SpotlightCard key={fact.label} className="p-5">
-                <p className="text-xs text-primary uppercase tracking-wider font-medium mb-1">{fact.label}</p>
-                <p className="text-foreground text-sm font-medium">{fact.value}</p>
+            {tour.animalFacts.map((fact, i) => (
+              <SpotlightCard key={fact.label} className="p-5 relative overflow-hidden">
+                <CardDecoration index={i} icon={factIcon(fact.label)} />
+                <div className="relative z-10">
+                  <div className="flex items-center gap-2 mb-2">
+                    <IconByName name={factIcon(fact.label)} size={16} className="text-primary" />
+                    <p className="text-xs text-primary uppercase tracking-wider font-medium">{fact.label}</p>
+                  </div>
+                  <p className="text-foreground text-sm font-medium">{fact.value}</p>
+                </div>
               </SpotlightCard>
             ))}
           </div>
         </motion.section>
+
 
         {/* Migration Info */}
         <motion.section {...fadeUp} className="grid md:grid-cols-2 gap-16 items-start">
