@@ -447,8 +447,9 @@ const TourDetail = () => {
           <SectionHeader label="Preparation" title="Recommended Gear" />
           <div className="grid md:grid-cols-2 gap-4 mt-10">
             {tour.gearTips.map((tip, i) => (
-              <SpotlightCard key={i} className="p-5">
-                <div className="flex items-start gap-3">
+              <SpotlightCard key={i} className="p-5 relative overflow-hidden">
+                <CardDecoration index={i} icon="Camera" />
+                <div className="relative z-10 flex items-start gap-3">
                   <Camera size={16} className="text-primary mt-0.5 shrink-0" />
                   <p className="text-foreground/90 text-sm">{tip}</p>
                 </div>
@@ -456,6 +457,7 @@ const TourDetail = () => {
             ))}
           </div>
         </motion.section>
+
 
 
         {/* Inclusions & Exclusions */}
