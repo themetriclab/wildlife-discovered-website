@@ -40,6 +40,13 @@ export interface TourPricing {
   price: string;
   dates: string;
   availability: string;
+  /** Short note describing what's included in this trip length (nights / full days / half days). */
+  note?: string;
+}
+
+export interface TourItineraryDay {
+  title: string;
+  content: string;
 }
 
 export interface TourFaq {
@@ -70,6 +77,13 @@ export interface Tour {
   priceIncludes?: string[];
   priceExcludes?: string[];
   paymentPolicy?: string;
+  /** Optional day-by-day itinerary rendered on the tour page. */
+  itinerary?: TourItineraryDay[];
+  /** Optional fitness & safety information section. */
+  fitnessSafety?: {
+    title: string;
+    content: string;
+  };
   /** Keyword-rich H1 override shown on the tour page. Falls back to `title`. */
   h1?: string;
   /** SEO <title> override. Falls back to `${title} | Silver Bear Photo Tours`. */
@@ -300,13 +314,13 @@ const rawTours: Tour[] = [
       "Insulated boots, warm winter coat, insulated over-pants, large warm mitts, thin gloves for camera buttons, warm hat, and wool socks (temps range from +2°C to -20°C)",
     ],
     pricing: [
-      { label: "5-Day Polar Bear Tour", price: "$5,100 CAD / $3,655 USD", dates: "Oct 14–18, 2027", availability: "Available" },
-      { label: "6-Day Polar Bear Tour", price: "$6,200 CAD / $4,460 USD", dates: "Oct 18–23, 2027", availability: "Available" },
-      { label: "6-Day Polar Bear Tour", price: "$6,200 CAD / $4,460 USD", dates: "Oct 23–28, 2027", availability: "Available" },
-      { label: "7-Day Polar Bear Tour", price: "$7,500 CAD / $5,260 USD", dates: "Oct 28–Nov 3, 2027", availability: "Available" },
-      { label: "8-Day Polar Bear Tour", price: "$8,500 CAD / $6,200 USD", dates: "Nov 3–10, 2027", availability: "Available" },
-      { label: "8-Day Polar Bear Tour", price: "$8,500 CAD / $6,200 USD", dates: "Nov 10–17, 2027", availability: "Available" },
-      { label: "8-Day Polar Bear Tour", price: "$8,500 CAD / $6,200 USD", dates: "Nov 17–24, 2027", availability: "Available" },
+      { label: "5-Day Polar Bear Tour", price: "$5,100 CAD / $3,655 USD", dates: "Oct 14–18, 2027", availability: "Available", note: "4 nights accommodation • 4 days of photography (3 full days + 2 half days)" },
+      { label: "6-Day Polar Bear Tour", price: "$6,200 CAD / $4,460 USD", dates: "Oct 18–23, 2027", availability: "Available", note: "5 nights accommodation • 5 days of photography (4 full days + 2 half days)" },
+      { label: "6-Day Polar Bear Tour", price: "$6,200 CAD / $4,460 USD", dates: "Oct 23–28, 2027", availability: "Available", note: "5 nights accommodation • 5 days of photography (4 full days + 2 half days)" },
+      { label: "7-Day Polar Bear Tour", price: "$7,500 CAD / $5,260 USD", dates: "Oct 28–Nov 3, 2027", availability: "Available", note: "6 nights accommodation • 6 days of photography (5 full days + 2 half days)" },
+      { label: "8-Day Polar Bear Tour", price: "$8,500 CAD / $6,200 USD", dates: "Nov 3–10, 2027", availability: "Available", note: "7 nights accommodation • 7 days of photography (6 full days + 2 half days)" },
+      { label: "8-Day Polar Bear Tour", price: "$8,500 CAD / $6,200 USD", dates: "Nov 10–17, 2027", availability: "Available", note: "7 nights accommodation • 7 days of photography (6 full days + 2 half days)" },
+      { label: "8-Day Polar Bear Tour", price: "$8,500 CAD / $6,200 USD", dates: "Nov 17–24, 2027", availability: "Available", note: "7 nights accommodation • 7 days of photography (6 full days + 2 half days)" },
     ],
     priceIncludes: [
       "Private lodge room with 3-piece bath, refrigerator, and individual thermostat",
@@ -315,18 +329,28 @@ const rawTours: Tour[] = [
       "Personalized photography instruction at all times",
       "Use of communal kitchen and common room",
       "Airport pickup and drop-off in Churchill",
+      "Quiet hours at the lodge from 9pm to 5:30am for restful sleep",
     ],
     priceExcludes: [
-      "Round-trip flights from Winnipeg to Churchill (booking assistance available)",
+      "Round-trip flights from Winnipeg to Churchill (Calm Air; we reserve seats for guests at a discounted rate and can book them for you)",
       "Hotel rooms in Winnipeg",
       "Lunches — purchased at the local grocery store and eaten in the field",
       "Dinners — join the group at Churchill's restaurants (no meal plan, choose anything on the menu)",
       "Alcoholic drinks and snacks",
       "5% Manitoba tax",
-      "Single occupancy supplement ($950–$1,400 depending on trip length)",
+      "Single occupancy supplement: $900 (5-day), $1,000 (6-day), $1,200 (7-day), or $1,400 (8-day) plus 5% Manitoba tax",
     ],
     paymentPolicy:
-      "A non-refundable $2,000 CAD deposit is required at time of booking. Balance in full is due 90 days prior to departure. Fees are based on double occupancy — single rooms available for an additional supplement. We accept e-transfer, PayPal (add 3.7%), or bank wire (add $17.50). Travel and health insurance are highly recommended.",
+      "A non-refundable $2,000 CAD deposit is required at time of booking. Once the deposit is received, your spot is confirmed and a detailed itinerary will be emailed to you. Balance in full is due 90 days prior to departure. Fees are based on double occupancy — single rooms are available for the supplement listed above. We accept e-transfer, PayPal (add 3.7%), or bank wire (add $17.50). If the balance is not received by the due date, we will attempt to fill your spot from the waiting list; if the spot is filled, you will receive a credit toward another trip of your choice. Travel and health insurance are highly recommended. Interested in 2028 dates? Contact us to be added to the early-interest list.",
+    itinerary: [
+      { title: "Arrival Day", content: "Fly from Winnipeg to Churchill, Manitoba. Your guide will meet you at the airport and transfer you to the private lodge. After settling into your room with private 3-piece bath, refrigerator, and individual thermostat, you'll receive a short safety orientation and winter photography tips over coffee, tea, and a light snack. Then it's out in search of polar bears. In the evening, the group gathers for dinner at one of Churchill's finer restaurants." },
+      { title: "Full Photography Days", content: "Each day begins with an early breakfast before heading out at first light in a 4×4 van built for the tundra. You'll photograph polar bears and Arctic wildlife on the ground at eye level, with plenty of room for gear and clothing. Midday brings a short lunch break, often in the field or back at the lodge depending on wildlife activity. Afternoons and evenings are spent chasing the best light, then reviewing the day over dinner. Northern lights photography is possible when skies are clear." },
+      { title: "Departure Day", content: "After a final morning photography session, your guide will transfer you to the Churchill airport for your flight back to Winnipeg, with memory cards full of ground-level polar bear images." },
+    ],
+    fitnessSafety: {
+      title: "Fitness & Safety",
+      content: "A low-to-medium fitness level is required. Most photography involves very short walks in snow less than a foot deep, with possible icy conditions. Bathroom breaks are available throughout the day. Your guide is a licensed Manitoba guide with full WMA permits and 15 years of polar bear field experience, including time spent learning from Inuit guides in northern Hudson Bay. Firearms are carried for safety but have never been needed in the Churchill area. Understanding bear patterns and behaviour is the key to both safety and strong images.",
+    },
     faqs: [
       { question: "When is the best time for polar bear photography in Churchill?", answer: "October and November are the peak months. Roughly 1,000 polar bears congregate along the western coast of Hudson Bay near Churchill, Manitoba, waiting for the sea ice to form." },
       { question: "How is this different from a tundra buggy tour?", answer: "Our polar bear photography tours put you on the ground at eye level with the bears — producing dramatically more powerful and intimate images than elevated buggy platforms." },
@@ -336,6 +360,8 @@ const rawTours: Tour[] = [
       { question: "What gear do I need for Churchill polar bear photography?", answer: "A 300–600mm telephoto, a wide-angle for landscapes and northern lights, two camera bodies, a sturdy tripod, extra batteries, and serious cold-weather clothing for temperatures down to -20°C." },
       { question: "Is this a polar bear photography workshop or a sightseeing tour?", answer: "This is a true photography workshop, not a sightseeing trip. Your licensed guide gives in-field instruction on camera settings, composition, exposure for snow and Arctic light, telephoto technique, and ethical wildlife viewing throughout each session." },
       { question: "How do I book this Churchill polar bear photography tour?", answer: "Reach out through our contact page to check current availability for October and November departures. A non-refundable $2,000 CAD deposit secures your spot, with the balance due 90 days before departure." },
+      { question: "What fitness level is required?", answer: "Low-to-medium fitness. You'll take very short walks in snow less than a foot deep, with possible icy conditions. Bathroom breaks are available throughout the day." },
+      { question: "How do I get to Churchill?", answer: "Guests fly Calm Air from Winnipeg to Churchill. We reserve seats for guests at a discounted rate and can book your round-trip flights to match your tour dates." },
     ],
   },
   {

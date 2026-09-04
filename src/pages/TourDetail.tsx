@@ -281,6 +281,9 @@ const TourDetail = () => {
                     <Calendar size={14} className="text-muted-foreground" />
                     <p className="text-sm text-muted-foreground">{p.dates}</p>
                   </div>
+                  {p.note && (
+                    <p className="text-xs text-muted-foreground mb-3 leading-relaxed">{p.note}</p>
+                  )}
                   <span className={`mt-auto inline-block text-xs font-medium tracking-wider uppercase px-3 py-1 rounded-full ${
                     p.availability.toLowerCase() === "full"
                       ? "bg-destructive/10 text-destructive"
@@ -326,6 +329,29 @@ const TourDetail = () => {
           <SectionHeader label="Experience" title={tour.whatToExpect.title} />
           <p className="text-muted-foreground leading-relaxed mt-6 max-w-3xl">{tour.whatToExpect.content}</p>
         </motion.section>
+
+        {/* Itinerary */}
+        {tour.itinerary && tour.itinerary.length > 0 && (
+          <motion.section {...fadeUp}>
+            <SectionHeader label="Itinerary" title="A Typical Day on Tour" />
+            <div className="grid md:grid-cols-3 gap-6 mt-10">
+              {tour.itinerary.map((day, i) => (
+                <SpotlightCard key={i} className="p-6">
+                  <h3 className="text-lg font-display font-semibold text-foreground mb-3">{day.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{day.content}</p>
+                </SpotlightCard>
+              ))}
+            </div>
+          </motion.section>
+        )}
+
+        {/* Fitness & Safety */}
+        {tour.fitnessSafety && (
+          <motion.section {...fadeUp} className="bg-card border border-border rounded-xl p-8 md:p-12">
+            <SectionHeader label="Safety" title={tour.fitnessSafety.title} />
+            <p className="text-muted-foreground leading-relaxed mt-6 max-w-3xl">{tour.fitnessSafety.content}</p>
+          </motion.section>
+        )}
 
         {/* Gear Tips */}
         <motion.section {...fadeUp}>
