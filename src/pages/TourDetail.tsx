@@ -381,10 +381,9 @@ const TourDetail = () => {
             <div className="grid md:grid-cols-3 gap-6 mt-10">
               {tour.whatToExpectItems.map((item, i) => (
                 <SpotlightCard key={i} className="p-6 relative overflow-hidden">
-                  <CardDecoration index={i} icon={item.icon} />
+                  <CardDecoration icon={item.icon} />
                   <div className="relative z-10">
                     <div className="flex items-center gap-3 mb-4">
-                      <NumberBadge index={i} />
                       <IconByName name={item.icon} size={22} className="text-primary" />
                     </div>
                     <h3 className="text-lg font-display font-semibold text-foreground mb-3">{item.title}</h3>
