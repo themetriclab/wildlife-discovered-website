@@ -357,9 +357,16 @@ const TourDetail = () => {
           {tour.whatToExpectItems && tour.whatToExpectItems.length > 0 ? (
             <div className="grid md:grid-cols-3 gap-6 mt-10">
               {tour.whatToExpectItems.map((item, i) => (
-                <SpotlightCard key={i} className="p-6">
-                  <h3 className="text-lg font-display font-semibold text-foreground mb-3">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{item.content}</p>
+                <SpotlightCard key={i} className="p-6 relative overflow-hidden">
+                  <CardDecoration index={i} icon={item.icon} />
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-3 mb-4">
+                      <NumberBadge index={i} />
+                      <IconByName name={item.icon} size={22} className="text-primary" />
+                    </div>
+                    <h3 className="text-lg font-display font-semibold text-foreground mb-3">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{item.content}</p>
+                  </div>
                 </SpotlightCard>
               ))}
             </div>
@@ -369,6 +376,7 @@ const TourDetail = () => {
             </div>
           )}
         </motion.section>
+
 
         {/* Itinerary */}
         {tour.itinerary && tour.itinerary.length > 0 && (
