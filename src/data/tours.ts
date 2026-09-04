@@ -40,6 +40,13 @@ export interface TourPricing {
   price: string;
   dates: string;
   availability: string;
+  /** Short note describing what's included in this trip length (nights / full days / half days). */
+  note?: string;
+}
+
+export interface TourItineraryDay {
+  title: string;
+  content: string;
 }
 
 export interface TourFaq {
