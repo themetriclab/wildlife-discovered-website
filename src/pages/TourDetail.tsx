@@ -325,9 +325,22 @@ const TourDetail = () => {
         </motion.section>
 
         {/* What to Expect */}
-        <motion.section {...fadeUp} className="bg-card border border-border rounded-xl p-8 md:p-12">
+        <motion.section {...fadeUp}>
           <SectionHeader label="Experience" title={tour.whatToExpect.title} />
-          <p className="text-muted-foreground leading-relaxed mt-6 max-w-3xl">{tour.whatToExpect.content}</p>
+          {tour.whatToExpectItems && tour.whatToExpectItems.length > 0 ? (
+            <div className="grid md:grid-cols-3 gap-6 mt-10">
+              {tour.whatToExpectItems.map((item, i) => (
+                <SpotlightCard key={i} className="p-6">
+                  <h3 className="text-lg font-display font-semibold text-foreground mb-3">{item.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{item.content}</p>
+                </SpotlightCard>
+              ))}
+            </div>
+          ) : (
+            <div className="bg-card border border-border rounded-xl p-8 md:p-12 mt-10">
+              <p className="text-muted-foreground leading-relaxed max-w-3xl">{tour.whatToExpect.content}</p>
+            </div>
+          )}
         </motion.section>
 
         {/* Itinerary */}
