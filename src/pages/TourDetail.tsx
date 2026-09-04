@@ -376,30 +376,28 @@ const TourDetail = () => {
 
 
         {/* Migration Info */}
-        <motion.section {...fadeUp} className="grid md:grid-cols-2 gap-16 items-start">
-          <div>
-            <SectionHeader label="Migration" title={tour.migrationInfo.title} />
-            <p className="text-muted-foreground leading-relaxed mt-6">{tour.migrationInfo.content}</p>
-          </div>
-          <div>
-            <SectionHeader label="Photography" title={tour.whyPhotograph.title} />
-            <p className="text-muted-foreground leading-relaxed mt-6">{tour.whyPhotograph.content}</p>
-          </div>
+        <motion.section {...fadeUp}>
+          <SectionHeader label="Migration" title={tour.migrationInfo.title} />
+          <p className="text-muted-foreground leading-relaxed mt-6 max-w-3xl">{tour.migrationInfo.content}</p>
         </motion.section>
 
-        {/* Ground-Level Group Photo */}
+        {/* Why Ground-Level Photography + Photo */}
         <motion.section {...fadeUp}>
-          <div className="rounded-xl overflow-hidden border border-border">
-            <img
-              src={groupPhotoGroundLevel.url}
-              alt="Photographers photographing polar bears at ground level in Churchill, Manitoba"
-              className="w-full h-auto object-cover"
-              loading="lazy"
-            />
+          <SectionHeader label="Photography" title={tour.whyPhotograph.title} />
+          <div className="grid md:grid-cols-2 gap-10 items-start mt-10">
+            <p className="text-muted-foreground leading-relaxed">{tour.whyPhotograph.content}</p>
+            <div className="rounded-xl overflow-hidden border border-border">
+              <img
+                src={groupPhotoGroundLevel.url}
+                alt="Photographers photographing polar bears at ground level in Churchill, Manitoba"
+                className="w-full h-auto object-cover"
+                loading="lazy"
+              />
+              <p className="text-center text-sm text-muted-foreground py-4 px-4 bg-card border-t border-border">
+                Guests photographing polar bears at ground level in Churchill, Manitoba
+              </p>
+            </div>
           </div>
-          <p className="text-center text-sm text-muted-foreground mt-4">
-            Guests photographing polar bears at ground level in Churchill, Manitoba
-          </p>
         </motion.section>
 
         {/* What to Expect */}
