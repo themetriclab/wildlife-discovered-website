@@ -257,8 +257,9 @@ const TourDetail = () => {
           <SectionHeader label="Overview" title="Tour Highlights" />
           <div className="grid md:grid-cols-2 gap-4 mt-10">
             {tour.highlights.map((h, i) => (
-              <SpotlightCard key={i} className="p-5">
-                <div className="flex items-start gap-3">
+              <SpotlightCard key={i} className="p-5 relative overflow-hidden">
+                <CardDecoration index={i} />
+                <div className="relative z-10 flex items-start gap-3">
                   <ChevronRight size={18} className="text-primary mt-0.5 shrink-0" />
                   <p className="text-foreground/90 text-sm leading-relaxed">{h}</p>
                 </div>
@@ -266,6 +267,7 @@ const TourDetail = () => {
             ))}
           </div>
         </motion.section>
+
 
         {/* Tour Image Slider */}
         {gallerySlug === "loon-photography-tours" && (
