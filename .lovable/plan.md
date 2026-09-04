@@ -24,11 +24,6 @@ Your Churchill page already covers: ground-level shooting, group of 5, lodge wit
 - Add the "2028 dates — contact us" note and the waiting-list credit refund policy to `paymentPolicy`.
 - Add one or two new FAQ entries (fitness level, flights to Churchill).
 
-## Needs your confirmation before I write it
-
-- **Guide credentials**: the other pages credit Michael Bertelsen with National Geographic, BBC Films, and Love Nature. Since your page is led by Erik, should I mention those credits (as "worked with") or leave them off?
-- **Supplement amounts**: use the exact $900/$1,000/$1,200/$1,400 figures from the other pages?
-
 ## Technical notes
 
 - All edits confined to the polar bear object in `src/data/tours.ts` (plus, if needed, an itinerary rendering block in `src/pages/TourDetail.tsx` following the existing section pattern).
