@@ -77,6 +77,13 @@ export interface Tour {
   priceIncludes?: string[];
   priceExcludes?: string[];
   paymentPolicy?: string;
+  /** Optional day-by-day itinerary rendered on the tour page. */
+  itinerary?: TourItineraryDay[];
+  /** Optional fitness & safety information section. */
+  fitnessSafety?: {
+    title: string;
+    content: string;
+  };
   /** Keyword-rich H1 override shown on the tour page. Falls back to `title`. */
   h1?: string;
   /** SEO <title> override. Falls back to `${title} | Silver Bear Photo Tours`. */
