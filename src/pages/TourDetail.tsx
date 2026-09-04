@@ -76,6 +76,23 @@ const IconByName = ({ name, className, size = 20 }: { name?: string; className?:
   return Icon ? <Icon size={size} className={className} /> : null;
 };
 
+const factIcon = (label: string): string => {
+  const lower = label.toLowerCase();
+  if (lower.includes("scientific")) return "Dna";
+  if (lower.includes("weight")) return "Scale";
+  if (lower.includes("height") || lower.includes("standing")) return "Ruler";
+  if (lower.includes("wingspan") || lower.includes("span")) return "Wind";
+  if (lower.includes("speed") || lower.includes("flight")) return "Zap";
+  if (lower.includes("dive") || lower.includes("swimming") || lower.includes("range")) return "Waves";
+  if (lower.includes("lifespan")) return "Hourglass";
+  if (lower.includes("diet")) return "Utensils";
+  if (lower.includes("population")) return "Users";
+  if (lower.includes("fur")) return "Shirt";
+  if (lower.includes("species") || lower.includes("diversity")) return "Bird";
+  return "Info";
+};
+
+
 const CardDecoration = ({ index, icon }: { index?: number; icon?: string }) => (
   <div className="absolute top-0 right-0 p-5 opacity-[0.04] pointer-events-none select-none overflow-hidden">
     {icon ? (
