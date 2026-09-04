@@ -387,6 +387,21 @@ const TourDetail = () => {
           </div>
         </motion.section>
 
+        {/* Ground-Level Group Photo */}
+        <motion.section {...fadeUp}>
+          <div className="rounded-xl overflow-hidden border border-border">
+            <img
+              src={groupPhotoGroundLevel.url}
+              alt="Photographers photographing polar bears at ground level in Churchill, Manitoba"
+              className="w-full h-auto object-cover"
+              loading="lazy"
+            />
+          </div>
+          <p className="text-center text-sm text-muted-foreground mt-4">
+            Guests photographing polar bears at ground level in Churchill, Manitoba
+          </p>
+        </motion.section>
+
         {/* What to Expect */}
         <motion.section {...fadeUp}>
           <SectionHeader label="Experience" title={tour.whatToExpect.title} />
