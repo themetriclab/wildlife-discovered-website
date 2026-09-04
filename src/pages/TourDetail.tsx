@@ -348,7 +348,7 @@ const TourDetail = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-10">
             {tour.animalFacts.map((fact, i) => (
               <SpotlightCard key={fact.label} className="p-5 relative overflow-hidden">
-                <CardDecoration index={i} icon={factIcon(fact.label)} />
+                <CardDecoration icon={factIcon(fact.label)} />
                 <div className="relative z-10">
                   <div className="flex items-center gap-2 mb-2">
                     <IconByName name={factIcon(fact.label)} size={16} className="text-primary" />
