@@ -10,6 +10,7 @@ import Seo from "@/components/Seo";
 import DiagonalSplitImage from "@/components/DiagonalSplitImage";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
 import { ImageAutoSlider } from "@/components/ui/image-auto-slider";
+import groupPhotoGroundLevel from "@/assets/polar-bear/group-photo-ground-level.png.asset.json";
 
 import loonHighKey2 from "@/assets/loon/high-key-loon-2.png";
 import loonMist from "@/assets/loon/loon-in-mist.jpg";
