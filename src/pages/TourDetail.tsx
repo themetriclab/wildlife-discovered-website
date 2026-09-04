@@ -1,7 +1,9 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, MapPin, Clock, Users, Mountain, Camera, ChevronRight, DollarSign, Check, X, CreditCard, HelpCircle } from "lucide-react";
+import { icons, ArrowLeft, Calendar, MapPin, Clock, Users, Mountain, Camera, ChevronRight, DollarSign, Check, X, CreditCard, HelpCircle } from "lucide-react";
+import type { TourItineraryDay } from "@/data/tours";
 import { tours } from "@/data/tours";
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Seo from "@/components/Seo";
@@ -67,6 +69,48 @@ const fadeUp = {
   viewport: { once: true },
   transition: { duration: 0.6 },
 };
+
+const IconByName = ({ name, className, size = 20 }: { name?: string; className?: string; size?: number }) => {
+  if (!name) return null;
+  const Icon = (icons as Record<string, React.ComponentType<{ size?: number; className?: string }>>)[name];
+  return Icon ? <Icon size={size} className={className} /> : null;
+};
+
+const factIcon = (label: string): string => {
+  const lower = label.toLowerCase();
+  if (lower.includes("scientific")) return "Dna";
+  if (lower.includes("weight")) return "Scale";
+  if (lower.includes("height") || lower.includes("standing")) return "Ruler";
+  if (lower.includes("wingspan") || lower.includes("span")) return "Wind";
+  if (lower.includes("speed") || lower.includes("flight")) return "Zap";
+  if (lower.includes("dive") || lower.includes("swimming") || lower.includes("range")) return "Waves";
+  if (lower.includes("lifespan")) return "Hourglass";
+  if (lower.includes("diet")) return "Utensils";
+  if (lower.includes("population")) return "Users";
+  if (lower.includes("fur")) return "Shirt";
+  if (lower.includes("species") || lower.includes("diversity")) return "Bird";
+  return "Info";
+};
+
+
+const CardDecoration = ({ index, icon }: { index?: number; icon?: string }) => (
+  <div className="absolute top-0 right-0 p-5 opacity-[0.04] pointer-events-none select-none overflow-hidden">
+    {icon ? (
+      <IconByName name={icon} size={96} className="text-primary" />
+    ) : index !== undefined ? (
+      <span className="text-7xl font-display font-bold text-primary leading-none">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+    ) : null}
+  </div>
+);
+
+const NumberBadge = ({ index }: { index: number }) => (
+  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary text-xs font-bold font-display mb-4">
+    {String(index + 1).padStart(2, "0")}
+  </div>
+);
+
 
 const TourDetail = () => {
   const { slug } = useParams();
@@ -230,8 +274,9 @@ const TourDetail = () => {
           <SectionHeader label="Overview" title="Tour Highlights" />
           <div className="grid md:grid-cols-2 gap-4 mt-10">
             {tour.highlights.map((h, i) => (
-              <SpotlightCard key={i} className="p-5">
-                <div className="flex items-start gap-3">
+              <SpotlightCard key={i} className="p-5 relative overflow-hidden">
+                <CardDecoration index={i} />
+                <div className="relative z-10 flex items-start gap-3">
                   <ChevronRight size={18} className="text-primary mt-0.5 shrink-0" />
                   <p className="text-foreground/90 text-sm leading-relaxed">{h}</p>
                 </div>
@@ -239,6 +284,7 @@ const TourDetail = () => {
             ))}
           </div>
         </motion.section>
+
 
         {/* Tour Image Slider */}
         {gallerySlug === "loon-photography-tours" && (
@@ -274,17 +320,26 @@ const TourDetail = () => {
             )}
             <div className="grid md:grid-cols-3 gap-4 mt-10">
               {tour.pricing.map((p, i) => (
-                <SpotlightCard key={i} className="p-6 flex flex-col">
-                  <p className="text-sm font-medium text-foreground mb-2">{p.label}</p>
-                  <p className="text-2xl font-display font-bold text-primary mb-2">{p.price}</p>
-                  <div className="flex items-center gap-2 mb-3">
-                    <Calendar size={14} className="text-muted-foreground" />
-                    <p className="text-sm text-muted-foreground">{p.dates}</p>
+                <SpotlightCard key={i} className="p-6 flex flex-col relative overflow-hidden">
+                  <CardDecoration index={i} icon="Calendar" />
+                  <div className="relative z-10 flex-1">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-primary">
+                        <Calendar size={14} />
+                      </div>
+                      <span className="text-xs text-muted-foreground uppercase tracking-wider">Tour {String(i + 1).padStart(2, "0")}</span>
+                    </div>
+                    <p className="text-sm font-medium text-foreground mb-2">{p.label}</p>
+                    <p className="text-2xl font-display font-bold text-primary mb-2">{p.price}</p>
+                    <div className="flex items-center gap-2 mb-3">
+                      <Calendar size={14} className="text-muted-foreground" />
+                      <p className="text-sm text-muted-foreground">{p.dates}</p>
+                    </div>
+                    {p.note && (
+                      <p className="text-xs text-muted-foreground mb-3 leading-relaxed">{p.note}</p>
+                    )}
                   </div>
-                  {p.note && (
-                    <p className="text-xs text-muted-foreground mb-3 leading-relaxed">{p.note}</p>
-                  )}
-                  <span className={`mt-auto inline-block text-xs font-medium tracking-wider uppercase px-3 py-1 rounded-full ${
+                  <span className={`mt-4 inline-block self-start text-xs font-medium tracking-wider uppercase px-3 py-1 rounded-full ${
                     p.availability.toLowerCase() === "full"
                       ? "bg-destructive/10 text-destructive"
                       : p.availability.toLowerCase().includes("1 spot")
@@ -296,6 +351,7 @@ const TourDetail = () => {
                 </SpotlightCard>
               ))}
             </div>
+
           </motion.section>
         )}
 
@@ -303,14 +359,21 @@ const TourDetail = () => {
         <motion.section {...fadeUp}>
           <SectionHeader label="Wildlife" title="Animal Facts" />
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-10">
-            {tour.animalFacts.map((fact) => (
-              <SpotlightCard key={fact.label} className="p-5">
-                <p className="text-xs text-primary uppercase tracking-wider font-medium mb-1">{fact.label}</p>
-                <p className="text-foreground text-sm font-medium">{fact.value}</p>
+            {tour.animalFacts.map((fact, i) => (
+              <SpotlightCard key={fact.label} className="p-5 relative overflow-hidden">
+                <CardDecoration index={i} icon={factIcon(fact.label)} />
+                <div className="relative z-10">
+                  <div className="flex items-center gap-2 mb-2">
+                    <IconByName name={factIcon(fact.label)} size={16} className="text-primary" />
+                    <p className="text-xs text-primary uppercase tracking-wider font-medium">{fact.label}</p>
+                  </div>
+                  <p className="text-foreground text-sm font-medium">{fact.value}</p>
+                </div>
               </SpotlightCard>
             ))}
           </div>
         </motion.section>
+
 
         {/* Migration Info */}
         <motion.section {...fadeUp} className="grid md:grid-cols-2 gap-16 items-start">
@@ -330,9 +393,16 @@ const TourDetail = () => {
           {tour.whatToExpectItems && tour.whatToExpectItems.length > 0 ? (
             <div className="grid md:grid-cols-3 gap-6 mt-10">
               {tour.whatToExpectItems.map((item, i) => (
-                <SpotlightCard key={i} className="p-6">
-                  <h3 className="text-lg font-display font-semibold text-foreground mb-3">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{item.content}</p>
+                <SpotlightCard key={i} className="p-6 relative overflow-hidden">
+                  <CardDecoration index={i} icon={item.icon} />
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-3 mb-4">
+                      <NumberBadge index={i} />
+                      <IconByName name={item.icon} size={22} className="text-primary" />
+                    </div>
+                    <h3 className="text-lg font-display font-semibold text-foreground mb-3">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{item.content}</p>
+                  </div>
                 </SpotlightCard>
               ))}
             </div>
@@ -343,20 +413,26 @@ const TourDetail = () => {
           )}
         </motion.section>
 
+
         {/* Itinerary */}
         {tour.itinerary && tour.itinerary.length > 0 && (
           <motion.section {...fadeUp}>
             <SectionHeader label="Itinerary" title="A Typical Day on Tour" />
             <div className="grid md:grid-cols-3 gap-6 mt-10">
               {tour.itinerary.map((day, i) => (
-                <SpotlightCard key={i} className="p-6">
-                  <h3 className="text-lg font-display font-semibold text-foreground mb-3">{day.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{day.content}</p>
+                <SpotlightCard key={i} className="p-6 relative overflow-hidden">
+                  <CardDecoration index={i} />
+                  <div className="relative z-10">
+                    <NumberBadge index={i} />
+                    <h3 className="text-lg font-display font-semibold text-foreground mb-3">{day.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{day.content}</p>
+                  </div>
                 </SpotlightCard>
               ))}
             </div>
           </motion.section>
         )}
+
 
         {/* Fitness & Safety */}
         {tour.fitnessSafety && (
@@ -371,8 +447,9 @@ const TourDetail = () => {
           <SectionHeader label="Preparation" title="Recommended Gear" />
           <div className="grid md:grid-cols-2 gap-4 mt-10">
             {tour.gearTips.map((tip, i) => (
-              <SpotlightCard key={i} className="p-5">
-                <div className="flex items-start gap-3">
+              <SpotlightCard key={i} className="p-5 relative overflow-hidden">
+                <CardDecoration index={i} icon="Camera" />
+                <div className="relative z-10 flex items-start gap-3">
                   <Camera size={16} className="text-primary mt-0.5 shrink-0" />
                   <p className="text-foreground/90 text-sm">{tip}</p>
                 </div>
@@ -380,6 +457,7 @@ const TourDetail = () => {
             ))}
           </div>
         </motion.section>
+
 
 
         {/* Inclusions & Exclusions */}
@@ -428,15 +506,19 @@ const TourDetail = () => {
             <SectionHeader label="FAQ" title="Frequently Asked Questions" />
             <div className="mt-10 space-y-4">
               {tour.faqs.map((f, i) => (
-                <SpotlightCard key={i} className="p-6">
-                  <div className="flex items-start gap-3 mb-3">
-                    <HelpCircle size={18} className="text-primary mt-0.5 shrink-0" />
-                    <h3 className="text-foreground font-medium">{f.question}</h3>
+                <SpotlightCard key={i} className="p-6 relative overflow-hidden">
+                  <CardDecoration index={i} icon="HelpCircle" />
+                  <div className="relative z-10">
+                    <div className="flex items-start gap-3 mb-3">
+                      <HelpCircle size={18} className="text-primary mt-0.5 shrink-0" />
+                      <h3 className="text-foreground font-medium">{f.question}</h3>
+                    </div>
+                    <p className="text-muted-foreground text-sm leading-relaxed pl-7">{f.answer}</p>
                   </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed pl-7">{f.answer}</p>
                 </SpotlightCard>
               ))}
             </div>
+
           </motion.section>
         )}
         <motion.section {...fadeUp} className="text-center py-12">
