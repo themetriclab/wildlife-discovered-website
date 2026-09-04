@@ -384,14 +384,19 @@ const TourDetail = () => {
             <SectionHeader label="Itinerary" title="A Typical Day on Tour" />
             <div className="grid md:grid-cols-3 gap-6 mt-10">
               {tour.itinerary.map((day, i) => (
-                <SpotlightCard key={i} className="p-6">
-                  <h3 className="text-lg font-display font-semibold text-foreground mb-3">{day.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{day.content}</p>
+                <SpotlightCard key={i} className="p-6 relative overflow-hidden">
+                  <CardDecoration index={i} />
+                  <div className="relative z-10">
+                    <NumberBadge index={i} />
+                    <h3 className="text-lg font-display font-semibold text-foreground mb-3">{day.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{day.content}</p>
+                  </div>
                 </SpotlightCard>
               ))}
             </div>
           </motion.section>
         )}
+
 
         {/* Fitness & Safety */}
         {tour.fitnessSafety && (
