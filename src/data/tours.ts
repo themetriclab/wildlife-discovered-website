@@ -276,7 +276,7 @@ const rawTours: Tour[] = [
     month: "October – November",
     season: "Late Autumn",
     location: "Churchill, Manitoba — Polar Bear Capital of the World",
-    duration: "6–8 Days",
+    duration: "5–8 Days",
     difficulty: "Intermediate–Advanced",
     groupSize: "5 Photographers",
     highlights: [
