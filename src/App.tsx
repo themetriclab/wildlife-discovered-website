@@ -16,33 +16,38 @@ import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
-const App = () => (
+/** Everything inside the router — shared by the browser app and the build-time prerenderer. */
+export const AppRoutes = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/tours" element={<Tours />} />
-          <Route path="/tours/:slug" element={<TourDetail />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          {/* Redirects from renamed tour slugs (preserve old indexed URLs) */}
-          <Route path="/tours/algonquin-park-photography-tours" element={<Navigate to="/tours/algonquin-park-wildlife-photography-tour" replace />} />
-          <Route path="/tours/waterfowl-and-swan-photography-tours" element={<Navigate to="/tours/ontario-waterfowl-photography-tours" replace />} />
-          <Route path="/polar-bear-photography-tours-churchill-manitoba" element={<Navigate to="/tours/polar-bear-photography-tour" replace />} />
-          <Route path="/moose-photography-tours-ontario-algonquin-park" element={<Navigate to="/tours/moose-photography-tours" replace />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/tours" element={<Tours />} />
+        <Route path="/tours/:slug" element={<TourDetail />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+        {/* Redirects from renamed tour slugs (preserve old indexed URLs) */}
+        <Route path="/tours/algonquin-park-photography-tours" element={<Navigate to="/tours/algonquin-park-wildlife-photography-tour" replace />} />
+        <Route path="/tours/waterfowl-and-swan-photography-tours" element={<Navigate to="/tours/ontario-waterfowl-photography-tours" replace />} />
+        <Route path="/polar-bear-photography-tours-churchill-manitoba" element={<Navigate to="/tours/polar-bear-photography-tour" replace />} />
+        <Route path="/moose-photography-tours-ontario-algonquin-park" element={<Navigate to="/tours/moose-photography-tours" replace />} />
+        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </TooltipProvider>
   </QueryClientProvider>
+);
+
+const App = () => (
+  <BrowserRouter>
+    <AppRoutes />
+  </BrowserRouter>
 );
 
 export default App;
