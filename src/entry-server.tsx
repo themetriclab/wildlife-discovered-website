@@ -8,7 +8,7 @@
  */
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
-import { HelmetProvider, type FilledContext } from "react-helmet-async";
+import { HelmetProvider, type HelmetServerState } from "react-helmet-async";
 import { AppRoutes } from "./App";
 import { tours } from "./data/tours";
 import { blogPosts } from "./data/blog";
@@ -27,7 +27,7 @@ export function getRoutes(): string[] {
 }
 
 export function renderHead(url: string): string {
-  const helmetContext = {} as FilledContext;
+  const helmetContext: { helmet?: HelmetServerState } = {};
   renderToString(
     <HelmetProvider context={helmetContext}>
       <StaticRouter location={url}>
